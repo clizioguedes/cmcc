@@ -1,6 +1,7 @@
 'use client'
 
 import { AppSidebar } from '@/components/sidebar/app-sidebar'
+import { ToggleTeme } from '@/components/toggle-theme'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -33,6 +34,7 @@ export default function PublicLayout({
               orientation="vertical"
               className="mr-2 data-[orientation=vertical]:h-4"
             />
+
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
@@ -47,6 +49,8 @@ export default function PublicLayout({
               </BreadcrumbList>
             </Breadcrumb>
           </div>
+
+          <ToggleTeme />
         </header>
 
         <main className="flex min-h-screen flex-1 flex-col gap-4 p-4 pt-0">
