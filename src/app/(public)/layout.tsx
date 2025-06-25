@@ -1,5 +1,8 @@
 'use client'
 
+import { MapIcon, PersonStandingIcon } from 'lucide-react'
+import Link from 'next/link'
+
 import { AppSidebar } from '@/components/sidebar/app-sidebar'
 import { ToggleTheme } from '@/components/toggle-theme'
 import {
@@ -10,12 +13,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar'
+import { cn } from '@/lib/utils'
 
 export default function PublicLayout({
   children,
@@ -27,7 +32,12 @@ export default function PublicLayout({
       <AppSidebar />
 
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center justify-between gap-2 px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+        <header
+          className={cn(
+            'flex flex-col gap-4 p-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12',
+            'lg:flex-row lg:items-center lg:justify-between',
+          )}
+        >
           <div className="flex items-center gap-2">
             <SidebarTrigger className="-ml-1" />
 
@@ -51,7 +61,23 @@ export default function PublicLayout({
             </Breadcrumb>
           </div>
 
-          <ToggleTheme />
+          <div className="flex flex-wrap items-center gap-3">
+            <Button asChild variant="outline">
+              <Link href="/site-map">
+                <MapIcon className="size-4" />
+                Mapa do site
+              </Link>
+            </Button>
+
+            <Button asChild variant="outline">
+              <Link href="/site-map">
+                <PersonStandingIcon className="size-4" />
+                Acessibilidade
+              </Link>
+            </Button>
+
+            <ToggleTheme />
+          </div>
         </header>
 
         <main className="flex min-h-screen flex-1 flex-col gap-4 p-4 pt-0">
