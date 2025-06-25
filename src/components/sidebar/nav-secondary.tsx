@@ -1,11 +1,12 @@
 'use client'
 
 import {
-  BlendIcon,
+  ArchiveIcon,
   ChevronRight,
-  FileQuestionMarkIcon,
+  HandCoinsIcon,
   LibraryBigIcon,
-  UserIcon,
+  ScaleIcon,
+  UsersRoundIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -27,154 +28,190 @@ import {
 
 const GROUPED_LINKS = [
   {
-    title: 'Portal da Transparência',
-    url: '/portal-da-transparencia',
-    icon: BlendIcon,
+    title: 'Área do Cidadão',
+    url: '/area-do-cidadao',
+    icon: UsersRoundIcon,
     items: [
       {
-        title: 'Atos Normativos',
-        url: '#',
-      },
-      {
-        title: 'Chamadas Públicas',
-        url: '#',
-      },
-      {
-        title: 'Concurso / Processo Seletivo',
-        url: '#',
-      },
-      {
-        title: 'Contracheque',
-        url: '#',
-      },
-      {
-        title: 'Contratos',
-        url: '#',
-      },
-      {
-        title: 'Convênios',
-        url: '#',
-      },
-      {
-        title: 'Despesas',
-        url: '#',
-      },
-      {
-        title: 'Diárias',
-        url: '#',
-      },
-      {
-        title: 'Editais',
-        url: '#',
-      },
-      {
-        title: 'Folha de Pagamento',
-        url: '#',
-      },
-      {
-        title: 'Licitações',
-        url: '#',
-      },
-      {
-        title: 'Obras',
-        url: '#',
-      },
-      {
-        title: 'Orçamentos',
-        url: '#',
-      },
-      {
-        title: 'Ordem de Pagamentos',
-        url: '#',
-      },
-      {
-        title: 'Portal da Transparência',
-        url: '#',
-      },
-      {
-        title: 'Prestação de contas',
-        url: '#',
-      },
-      {
-        title: 'Processos Licitatórios',
-        url: '#',
-      },
-      {
-        title: 'Receitas',
-        url: '#',
-      },
-      {
-        title: 'Relação de Servidores e Autoridades',
-        url: '#',
-      },
-      {
-        title: 'Relatório de Contratações',
-        url: '#',
-      },
-      {
-        title: 'Servidores',
-        url: '#',
-      },
-      {
-        title: 'Verba indenizatória',
+        title: 'Busca de Ouvidoria e e-SIC',
         url: '#',
       },
     ],
   },
   {
-    title: 'Portal do Contribuinte',
+    title: 'Certidões',
     url: '#',
-    icon: UserIcon,
+    icon: ArchiveIcon,
     items: [
       {
-        title: 'Consultar DIR',
+        title: 'Certidão Estadual',
         url: '#',
       },
       {
-        title: 'Consultar RPS',
+        title: 'Certidão Federal',
         url: '#',
       },
       {
-        title: 'Lista de Empresas',
+        title: 'Certidão FGTS',
         url: '#',
       },
       {
-        title: 'NFS-e',
+        title: 'Certidão Municipal',
+        url: '#',
+      },
+      {
+        title: 'Certidão Trabalhista',
+        url: '#',
+      },
+      {
+        title: 'Falência e Concordata',
         url: '#',
       },
     ],
   },
   {
-    title: 'História',
+    title: 'Estrutura Organizacional',
     url: '#',
     icon: LibraryBigIcon,
     items: [
       {
-        title: 'Bandeira e Símbolos',
+        title: 'Comissões',
         url: '#',
       },
       {
-        title: 'Câmara',
+        title: 'Estrutura Organizacional',
         url: '#',
       },
       {
-        title: 'História',
+        title: 'Mesa Diretora',
+        url: '#',
+      },
+      {
+        title: 'Parlamentares',
+        url: '#',
+      },
+      {
+        title: 'Regime Interno',
+        url: '#',
+      },
+      {
+        title: 'Relatório de Gestão e Atividades',
         url: '#',
       },
     ],
   },
   {
-    title: 'Perguntas Frequentes',
+    title: 'Responsabilidade Fiscal e Orçamentos',
     url: '#',
-    icon: FileQuestionMarkIcon,
-    items: [],
+    icon: HandCoinsIcon,
+    items: [
+      {
+        title: 'Balanço Geral',
+        url: '#',
+      },
+      {
+        title: 'Demonstrativo de Contas',
+        url: '#',
+      },
+      {
+        title: 'Lei de Diretrizes Orçamentárias',
+        url: '#',
+      },
+      {
+        title: 'Lei de Orçamentária Anual',
+        url: '#',
+      },
+      {
+        title: 'Plano Plurianual',
+        url: '#',
+      },
+      {
+        title: 'Demonstrativo de Despesas',
+        url: '#',
+      },
+      {
+        title: 'Relatório de Gestão Fiscal',
+        url: '#',
+      },
+    ],
+  },
+  {
+    title: 'Trabalho Legislativo',
+    url: '#',
+    icon: ScaleIcon,
+    items: [
+      {
+        title: 'Atas',
+        url: '#',
+      },
+      {
+        title: 'Atas Normativos',
+        url: '#',
+      },
+      {
+        title: 'Decretos',
+        url: '#',
+      },
+      {
+        title: 'Lei Orgânica Municipal',
+        url: '#',
+      },
+      {
+        title: 'Leis Mun. Sancionadas',
+        url: '#',
+      },
+      {
+        title: 'Lista de Frequência',
+        url: '#',
+      },
+      {
+        title: 'Pautas das Sessões',
+        url: '#',
+      },
+      {
+        title: 'Portarias',
+        url: '#',
+      },
+      {
+        title: 'Projetos de Resolução',
+        url: '#',
+      },
+      {
+        title: 'Projetos de Lei',
+        url: '#',
+      },
+      {
+        title: 'Regulamentação da LAI',
+        url: '#',
+      },
+      {
+        title: 'Regulamentação da Lei Gov. Digital',
+        url: '#',
+      },
+      {
+        title: 'Regulamentação da LGPD',
+        url: '#',
+      },
+      {
+        title: 'Regulamentação da Nova Lei de Licitações 14.133/2021',
+        url: '#',
+      },
+      {
+        title: 'Requerimentos',
+        url: '#',
+      },
+      {
+        title: 'Resoluções',
+        url: '#',
+      },
+    ],
   },
 ]
 
-export function NavMain() {
+export function NavSecondary() {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Principais Links</SidebarGroupLabel>
+      <SidebarGroupLabel>Links Úteis</SidebarGroupLabel>
 
       <SidebarMenu>
         {GROUPED_LINKS.map((item) => {

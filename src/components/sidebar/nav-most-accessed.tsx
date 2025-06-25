@@ -1,12 +1,6 @@
 'use client'
 
-import {
-  BlendIcon,
-  ChevronRight,
-  FileQuestionMarkIcon,
-  LibraryBigIcon,
-  UserIcon,
-} from 'lucide-react'
+import { ChevronRight, GlobeIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import {
@@ -27,64 +21,36 @@ import {
 
 const GROUPED_LINKS = [
   {
-    title: 'Portal da Transparência',
-    url: '/portal-da-transparencia',
-    icon: BlendIcon,
+    title: 'Serviços',
+    url: '/servicos',
+    icon: GlobeIcon,
     items: [
       {
-        title: 'Atos Normativos',
+        title: 'Assinatura Digital',
         url: '#',
       },
       {
-        title: 'Chamadas Públicas',
+        title: 'Consultar CPF',
         url: '#',
       },
       {
-        title: 'Concurso / Processo Seletivo',
+        title: 'Consultar e solicitar a devolução de Valores à Receber',
         url: '#',
       },
       {
-        title: 'Contracheque',
+        title: 'Consultar restituição de Imposto de Renda',
         url: '#',
       },
       {
-        title: 'Contratos',
+        title: 'Cursos Profissionalizantes',
         url: '#',
       },
       {
-        title: 'Convênios',
+        title: 'Fazer o Exame Nacional do Ensino Médio (ENEM)',
         url: '#',
       },
       {
-        title: 'Despesas',
-        url: '#',
-      },
-      {
-        title: 'Diárias',
-        url: '#',
-      },
-      {
-        title: 'Editais',
-        url: '#',
-      },
-      {
-        title: 'Folha de Pagamento',
-        url: '#',
-      },
-      {
-        title: 'Licitações',
-        url: '#',
-      },
-      {
-        title: 'Obras',
-        url: '#',
-      },
-      {
-        title: 'Orçamentos',
-        url: '#',
-      },
-      {
-        title: 'Ordem de Pagamentos',
+        title: 'Obter Carteira de Trabalho',
         url: '#',
       },
       {
@@ -92,89 +58,25 @@ const GROUPED_LINKS = [
         url: '#',
       },
       {
-        title: 'Prestação de contas',
+        title: 'Receber Abono Salarial',
         url: '#',
       },
       {
-        title: 'Processos Licitatórios',
+        title: 'Solicitar Auxílio-Inclusão à Pessoa com Deficiência',
         url: '#',
       },
       {
-        title: 'Receitas',
-        url: '#',
-      },
-      {
-        title: 'Relação de Servidores e Autoridades',
-        url: '#',
-      },
-      {
-        title: 'Relatório de Contratações',
-        url: '#',
-      },
-      {
-        title: 'Servidores',
-        url: '#',
-      },
-      {
-        title: 'Verba indenizatória',
+        title: 'Solicitar Seguro Defeso – Pescador Artesanal',
         url: '#',
       },
     ],
-  },
-  {
-    title: 'Portal do Contribuinte',
-    url: '#',
-    icon: UserIcon,
-    items: [
-      {
-        title: 'Consultar DIR',
-        url: '#',
-      },
-      {
-        title: 'Consultar RPS',
-        url: '#',
-      },
-      {
-        title: 'Lista de Empresas',
-        url: '#',
-      },
-      {
-        title: 'NFS-e',
-        url: '#',
-      },
-    ],
-  },
-  {
-    title: 'História',
-    url: '#',
-    icon: LibraryBigIcon,
-    items: [
-      {
-        title: 'Bandeira e Símbolos',
-        url: '#',
-      },
-      {
-        title: 'Câmara',
-        url: '#',
-      },
-      {
-        title: 'História',
-        url: '#',
-      },
-    ],
-  },
-  {
-    title: 'Perguntas Frequentes',
-    url: '#',
-    icon: FileQuestionMarkIcon,
-    items: [],
   },
 ]
 
-export function NavMain() {
+export function NavMostAccessed() {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Principais Links</SidebarGroupLabel>
+      <SidebarGroupLabel>Mais Acessados</SidebarGroupLabel>
 
       <SidebarMenu>
         {GROUPED_LINKS.map((item) => {

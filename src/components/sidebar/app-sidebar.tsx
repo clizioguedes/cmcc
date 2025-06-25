@@ -1,6 +1,3 @@
-'use client'
-
-import { Frame, Map, PieChart } from 'lucide-react'
 import * as React from 'react'
 
 import {
@@ -13,34 +10,9 @@ import {
 
 import { NavLogo } from './nav-logo'
 import { NavMain } from './nav-main'
-import { NavProjects } from './nav-projects'
+import { NavMostAccessed } from './nav-most-accessed'
+import { NavSecondary } from './nav-secondary'
 import { NavUser } from './nav-user'
-
-// This is sample data.
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map,
-    },
-  ],
-}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -50,12 +22,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
+        <NavMostAccessed />
         <NavMain />
-        <NavProjects projects={data.projects} />
+        <NavSecondary />
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
 
       <SidebarRail />
