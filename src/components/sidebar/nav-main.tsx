@@ -211,7 +211,11 @@ export function NavMain() {
                   <SidebarMenuSub>
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton asChild>
+                        <SidebarMenuSubButton
+                          asChild
+                          truncate={false}
+                          className="h-fit py-1"
+                        >
                           <a href={subItem.url}>
                             <span>{subItem.title}</span>
                           </a>

@@ -80,19 +80,6 @@ export function NavMostAccessed() {
 
       <SidebarMenu>
         {GROUPED_LINKS.map((item) => {
-          if (item.items?.length === 0) {
-            return (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <Link href={item.url}>
-                    {item.icon && <item.icon />}
-                    <span>{item.title}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            )
-          }
-
           return (
             <Collapsible
               key={item.title}
@@ -113,10 +100,14 @@ export function NavMostAccessed() {
                   <SidebarMenuSub>
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton asChild>
-                          <a href={subItem.url}>
+                        <SidebarMenuSubButton
+                          asChild
+                          truncate={false}
+                          className="h-fit py-1"
+                        >
+                          <Link href={subItem.url}>
                             <span>{subItem.title}</span>
-                          </a>
+                          </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
                     ))}
