@@ -1,6 +1,6 @@
 'use client'
 
-import { MapIcon, PersonStandingIcon } from 'lucide-react'
+import { MapIcon, PersonStandingIcon, SearchIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { AppSidebar } from '@/components/sidebar/app-sidebar'
@@ -14,6 +14,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import {
   SidebarInset,
@@ -80,7 +81,15 @@ export default function PublicLayout({
           </div>
         </header>
 
-        <main className="flex min-h-screen flex-1 flex-col gap-4 p-4 pt-0">
+        <div className="border-muted flex items-center border-y p-4 px-4">
+          <Input
+            placeholder="Pesquisar..."
+            className={cn('ml-auto w-full', 'lg:w-fit')}
+            icon={SearchIcon}
+          />
+        </div>
+
+        <main className="flex min-h-screen flex-1 flex-col gap-4 p-4">
           {children}
         </main>
       </SidebarInset>
