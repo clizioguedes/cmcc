@@ -6,19 +6,20 @@ import { useLocalStorage } from '@/hooks/use-local-storage'
 
 export type FontSize = 'small' | 'normal' | 'large' | 'xlarge'
 
+export const FONT_SIZE_KEY = 'font-size'
+
 export function FontSizeProvider() {
-  const [fontSize] = useLocalStorage<FontSize>('font-size', 'normal')
+  const [fontSize] = useLocalStorage<FontSize>(FONT_SIZE_KEY, 'normal')
 
   useEffect(() => {
-    const classList = document.documentElement.classList
-
-    const current = Array.from(classList).find((c) =>
-      c.startsWith('font-size-'),
+    document.documentElement.classList.remove(
+      'font-size-small',
+      'font-size-normal',
+      'font-size-large',
+      'font-size-xlarge',
     )
 
-    if (current) classList.remove(current)
-
-    classList.add(`font-size-${fontSize}`)
+    document.documentElement.classList.add(`font-size-${fontSize}`)
   }, [fontSize])
 
   return null

@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card'
 import { useLocalStorage } from '@/hooks/use-local-storage'
 import { cn } from '@/lib/utils'
-import type { FontSize } from '@/providers/font-size-provider'
+import { FONT_SIZE_KEY, type FontSize } from '@/providers/font-size-provider'
 
 const FONT_SIZES: Record<FontSize, string> = {
   small: 'Pequeno',
@@ -22,7 +22,7 @@ const FONT_SIZES: Record<FontSize, string> = {
 }
 
 export function SelectGlobalAppFontSize() {
-  const [fontSize, setFontSize] = useLocalStorage<FontSize>('font-size')
+  const [fontSize, setFontSize] = useLocalStorage<FontSize>(FONT_SIZE_KEY)
 
   const changeSize = (size: FontSize) => {
     setFontSize(size)
