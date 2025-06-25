@@ -1,6 +1,12 @@
 'use client'
 
-import { ChevronRight, type LucideIcon } from 'lucide-react'
+import {
+  BlendIcon,
+  ChevronRight,
+  FileQuestionMarkIcon,
+  LibraryBigIcon,
+  UserIcon,
+} from 'lucide-react'
 
 import {
   Collapsible,
@@ -18,29 +24,167 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string
-    url: string
-    icon?: LucideIcon
-    isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
-  }[]
-}) {
+const GROUPED_LINKS = [
+  {
+    title: 'Portal da Transparência',
+    url: '/portal-da-transparencia',
+    icon: BlendIcon,
+    items: [
+      {
+        title: 'Atos Normativos',
+        url: '#',
+      },
+      {
+        title: 'Chamadas Públicas',
+        url: '#',
+      },
+      {
+        title: 'Concurso / Processo Seletivo',
+        url: '#',
+      },
+      {
+        title: 'Contracheque',
+        url: '#',
+      },
+      {
+        title: 'Contratos',
+        url: '#',
+      },
+      {
+        title: 'Convênios',
+        url: '#',
+      },
+      {
+        title: 'Despesas',
+        url: '#',
+      },
+      {
+        title: 'Diárias',
+        url: '#',
+      },
+      {
+        title: 'Editais',
+        url: '#',
+      },
+      {
+        title: 'Folha de Pagamento',
+        url: '#',
+      },
+      {
+        title: 'Licitações',
+        url: '#',
+      },
+      {
+        title: 'Obras',
+        url: '#',
+      },
+      {
+        title: 'Orçamentos',
+        url: '#',
+      },
+      {
+        title: 'Ordem de Pagamentos',
+        url: '#',
+      },
+      {
+        title: 'Portal da Transparência',
+        url: '#',
+      },
+      {
+        title: 'Prestação de contas',
+        url: '#',
+      },
+      {
+        title: 'Processos Licitatórios',
+        url: '#',
+      },
+      {
+        title: 'Receitas',
+        url: '#',
+      },
+      {
+        title: 'Relação de Servidores e Autoridades',
+        url: '#',
+      },
+      {
+        title: 'Relatório de Contratações',
+        url: '#',
+      },
+      {
+        title: 'Servidores',
+        url: '#',
+      },
+      {
+        title: 'Verba indenizatória',
+        url: '#',
+      },
+    ],
+  },
+  {
+    title: 'Portal do Contribuinte',
+    url: '#',
+    icon: UserIcon,
+    items: [
+      {
+        title: 'Consultar DIR',
+        url: '#',
+      },
+      {
+        title: 'Consultar RPS',
+        url: '#',
+      },
+      {
+        title: 'Lista de Empresas',
+        url: '#',
+      },
+      {
+        title: 'NFS-e',
+        url: '#',
+      },
+    ],
+  },
+  {
+    title: 'História',
+    url: '#',
+    icon: LibraryBigIcon,
+    items: [
+      {
+        title: 'Bandeira e Símbolos',
+        url: '#',
+      },
+      {
+        title: 'Câmara',
+        url: '#',
+      },
+      {
+        title: 'História',
+        url: '#',
+      },
+    ],
+  },
+  {
+    title: 'Perguntas Frequentes',
+    url: '#',
+    icon: FileQuestionMarkIcon,
+    items: [
+      {
+        title: 'Dúvidas Gerais',
+        url: '#',
+      },
+    ],
+  },
+]
+
+export function NavMain() {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Principais Links</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {GROUPED_LINKS.map((item) => (
           <Collapsible
             key={item.title}
             asChild
-            defaultOpen={item.isActive}
+            // defaultOpen={item.isActive}
             className="group/collapsible"
           >
             <SidebarMenuItem>
@@ -51,6 +195,7 @@ export function NavMain({
                   <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
+
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => (
