@@ -1,6 +1,14 @@
-export default function HomePage() {
+import { getArticles } from '@/http/requests/get-articles'
+
+export default async function HomePage() {
+  const articles = await getArticles()
+
   return (
     <div className="flex flex-1 flex-col gap-4">
+      <pre>
+        <code>{JSON.stringify(articles, null, 2)}</code>
+      </pre>
+
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
         <div className="bg-muted/50 aspect-video rounded-xl" />
         <div className="bg-muted/50 aspect-video rounded-xl" />
