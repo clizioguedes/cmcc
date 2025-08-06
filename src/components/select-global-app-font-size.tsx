@@ -45,14 +45,14 @@ export function SelectGlobalAppFontSize() {
             <span className={`font-medium`}>Tamanho da fonte:</span>
           </div>
 
-          <div className={cn('grid grid-cols-1 gap-6', 'lg:grid-cols-4')}>
+          <div className={cn('flex flex-col gap-3', 'md:flex-row')}>
             {Object.entries(FONT_SIZES).map(([key, value]) => (
               <Button
                 key={key}
                 variant={fontSize === key ? 'default' : 'outline'}
                 size="lg"
                 onClick={() => changeSize(key as FontSize)}
-                className="h-28 px-6 py-3 text-lg"
+                className="p-8"
               >
                 {value}
               </Button>
