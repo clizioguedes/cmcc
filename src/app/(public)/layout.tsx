@@ -64,7 +64,7 @@ export default function PublicLayout({
 
           <div className="flex flex-wrap items-center gap-3">
             <Button asChild variant="outline">
-              <Link href="/site-map">
+              <Link href="/site/sitemap">
                 <MapIcon className="size-4" />
                 Mapa do site
               </Link>
