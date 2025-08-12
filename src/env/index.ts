@@ -4,6 +4,7 @@ import { z } from 'zod'
 export const env = createEnv({
   server: {
     STRAPI_WEBHOOK_SECRET: z.string(),
+    STRAPI_API_TOKEN: z.string(),
   },
 
   client: {},
@@ -20,5 +21,6 @@ export const env = createEnv({
 
     // server
     STRAPI_WEBHOOK_SECRET: process.env.STRAPI_WEBHOOK_SECRET,
+    STRAPI_API_TOKEN: process.env.STRAPI_API_TOKEN,
   },
 })

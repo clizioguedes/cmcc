@@ -2,13 +2,14 @@
 
 import { MapIcon, PersonStandingIcon, SearchIcon } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Fragment } from 'react'
 
 import { AppSidebar } from '@/components/sidebar/app-sidebar'
 import { ToggleTheme } from '@/components/toggle-theme'
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
@@ -28,6 +29,10 @@ export default function PublicLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const pathname = usePathname()
+
+  const pathSegments = pathname.split('/').filter((segment) => segment)
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -49,15 +54,28 @@ export default function PublicLayout({
 
             <Breadcrumb>
               <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                  <Link href="/">/</Link>
                 </BreadcrumbItem>
+
+                {pathSegments.map((path, index) => {
+                  const href = '/' + pathSegments.slice(0, index + 1).join('/')
+                  const isLast = index === pathSegments.length - 1
+
+                  return (
+                    <Fragment key={path}>
+                      <BreadcrumbSeparator />
+
+                      <BreadcrumbItem>
+                        {isLast ? (
+                          <BreadcrumbPage>{path}</BreadcrumbPage>
+                        ) : (
+                          <Link href={href}>{path}</Link>
+                        )}
+                      </BreadcrumbItem>
+                    </Fragment>
+                  )
+                })}
               </BreadcrumbList>
             </Breadcrumb>
           </div>

@@ -6,6 +6,11 @@ export const api = ky.create({
   prefixUrl: env.NEXT_PUBLIC_CMS_API_URL,
   retry: 3,
   hooks: {
+    beforeRequest: [
+      async (request) => {
+        request.headers.set('Authorization', `Bearer ${env.STRAPI_API_TOKEN}`)
+      },
+    ],
     beforeError: [
       async (error): Promise<HTTPError<{ message: string }>> => {
         const { response } = error

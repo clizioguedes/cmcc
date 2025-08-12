@@ -38,6 +38,8 @@ export async function POST(req: Request) {
       console.log('✅ Webhook test received')
     }
 
+    console.log(body.event)
+
     if (UPDATE_POSTS_TRIGGER_EVENTS.includes(body.event)) {
       console.log(`🔄 Revalidating posts due to event: ${body.event}`)
       revalidateTag('articles')
