@@ -45,11 +45,19 @@ export type Cover = {
   publishedAt: string
 }
 
+export type AuthorAvatar = {
+  id: number
+  documentId: string
+  url: string
+}
+
 export type Author = {
   id: number
   documentId: string
   name: string
   email: string
+  avatar?: AuthorAvatar
+  position?: string
 }
 
 export type Tag = {

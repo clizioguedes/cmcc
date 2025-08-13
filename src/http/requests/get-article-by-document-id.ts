@@ -23,7 +23,14 @@ export async function getArticleByDocumentId(
 
   const searchParams = buildPopulateParams({
     cover: true,
-    author: ['name', 'email'],
+    author: {
+      fields: ['name', 'email', 'position'],
+      populate: {
+        avatar: {
+          fields: ['url'],
+        },
+      },
+    },
     category: ['name', 'slug'],
     tags: ['documentId', 'name', 'slug'],
   })

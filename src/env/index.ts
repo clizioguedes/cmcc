@@ -12,12 +12,14 @@ export const env = createEnv({
   shared: {
     NEXT_PUBLIC_BASE_URL: z.string().url(),
     NEXT_PUBLIC_CMS_API_URL: z.string().url(),
+    NEXT_PUBLIC_CMS_URL: z.string().url(),
   },
 
   runtimeEnv: {
     // shared
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_CMS_API_URL: process.env.NEXT_PUBLIC_CMS_API_URL,
+    NEXT_PUBLIC_CMS_URL: process.env.NEXT_PUBLIC_CMS_URL,
 
     // server
     STRAPI_WEBHOOK_SECRET: process.env.STRAPI_WEBHOOK_SECRET,

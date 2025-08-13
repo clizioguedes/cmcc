@@ -1,22 +1,68 @@
-type PopulateValue = true | string[] | { [key: string]: PopulateValue }
+type PopulateConfig = true | string[] | { [key: string]: PopulateConfig }
 
+/**
+ * Gera pares [key, value] para usar diretamente em `searchParams` (ky/fetch).
+ * - true => populate tudo: populate[foo]=true
+ * - string[] => fields: populate[foo][fields][0]=field1 ...
+ * - object => trata chaves aninhadas; aceita chaves especiais:
+ *    - "populate": true | string[] | object  -> popula sub-relations (ex: avatar)
+ *    - "fields": string[]                    -> fields explícitos
+ */
 export function buildPopulateParams(
-  populate: PopulateValue,
+  cfg: PopulateConfig,
   prefix = 'populate',
-): Record<string, string> {
-  const params: Record<string, string> = {}
+): Array<[string, string]> {
+  const out: Array<[string, string]> = []
 
-  if (populate === true) {
-    params[prefix] = 'true'
-  } else if (Array.isArray(populate)) {
-    populate.forEach((field, index) => {
-      params[`${prefix}[fields][${index}]`] = field
-    })
-  } else if (typeof populate === 'object' && populate !== null) {
-    for (const [key, value] of Object.entries(populate)) {
-      Object.assign(params, buildPopulateParams(value, `${prefix}[${key}]`))
-    }
+  // caso: populate = true  -> populate[...]=true
+  if (cfg === true) {
+    out.push([prefix, 'true'])
+    return out
   }
 
-  return params
+  // caso: array de strings => tratamos como "fields"
+  if (Array.isArray(cfg)) {
+    cfg.forEach((field, i) => {
+      out.push([`${prefix}[fields][${i}]`, String(field)])
+    })
+    return out
+  }
+
+  // caso: objeto aninhado
+  for (const [key, value] of Object.entries(cfg)) {
+    // chave especial: "populate" (vai criar populate[...][populate]...)
+    if (key === 'populate') {
+      const v = value
+      if (v === true) {
+        out.push([`${prefix}[populate]`, 'true'])
+      } else if (Array.isArray(v)) {
+        v.forEach((item, i) => {
+          out.push([`${prefix}[populate][${i}]`, String(item)])
+        })
+      } else if (typeof v === 'object' && v !== null) {
+        // permite populate: { someRel: true | [...] | {...} }
+        for (const [subKey, subVal] of Object.entries(v)) {
+          out.push(
+            ...buildPopulateParams(subVal, `${prefix}[populate][${subKey}]`),
+          )
+        }
+      }
+      continue
+    }
+
+    // chave especial: "fields" (pode vir junto com populate)
+    if (key === 'fields' && Array.isArray(value)) {
+      ;(value as string[]).forEach((field, i) => {
+        out.push([`${prefix}[fields][${i}]`, String(field)])
+      })
+      continue
+    }
+
+    // caso geral: entra em populate[...][KEY]
+    out.push(
+      ...buildPopulateParams(value as PopulateConfig, `${prefix}[${key}]`),
+    )
+  }
+
+  return out
 }
