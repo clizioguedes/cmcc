@@ -99,7 +99,7 @@ export async function ArticleDetails({ slug }: ArticleDetailsProps) {
         />
       )}
 
-      <div className="prose max-w-none">
+      <div className={cn('prose max-w-none', 'dark:prose-invert')}>
         <BlocksRenderer content={article.content} />
       </div>
 

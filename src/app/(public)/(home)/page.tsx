@@ -1,28 +1,25 @@
+import { LinkIcon } from 'lucide-react'
+import Link from 'next/link'
+
+import { Button } from '@/components/ui/button'
 import { getArticles } from '@/http/requests/get-articles'
 
 export default async function HomePage() {
-  let teste = {}
-
-  try {
-    const articles = await getArticles()
-    teste = articles
-  } catch (error) {
-    console.log(error)
-  }
+  const articles = await getArticles()
 
   return (
     <div className="flex flex-1 flex-col gap-4">
-      <pre>
-        <code>{JSON.stringify(teste, null, 2)}</code>
-      </pre>
-
-      <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div className="bg-muted/50 aspect-video rounded-xl" />
-        <div className="bg-muted/50 aspect-video rounded-xl" />
-        <div className="bg-muted/50 aspect-video rounded-xl" />
-      </div>
-
-      <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+      {articles.data.map((article) => (
+        <Button asChild variant="link" key={article.id} className="w-fit">
+          <Link
+            href={`/noticias/${article.slug}`}
+            className="flex items-center gap-3"
+          >
+            <LinkIcon className="size-4" />
+            {article.title}
+          </Link>
+        </Button>
+      ))}
     </div>
   )
 }

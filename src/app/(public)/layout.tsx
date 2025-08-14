@@ -107,9 +107,7 @@ export default function PublicLayout({
           />
         </div>
 
-        <main className="flex min-h-screen flex-1 flex-col gap-4 p-4">
-          {children}
-        </main>
+        <main className="flex flex-1 flex-col gap-4 p-4">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   )

@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 
 export function ArticleNotFound() {
   return (
-    <div className={cn('mt-8 flex min-h-screen justify-center')}>
+    <div className={cn('mt-8 flex justify-center')}>
       <div className="flex flex-col gap-4 text-center">
         <div className="flex flex-col items-center gap-4">
           <FileXIcon className="text-muted-foreground/50 size-24" />
