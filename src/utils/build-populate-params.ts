@@ -11,13 +11,13 @@ type PopulateConfig = true | string[] | { [key: string]: PopulateConfig }
 export function buildPopulateParams(
   cfg: PopulateConfig,
   prefix = 'populate',
-): Array<[string, string]> {
+): URLSearchParams {
   const out: Array<[string, string]> = []
 
   // caso: populate = true  -> populate[...]=true
   if (cfg === true) {
     out.push([prefix, 'true'])
-    return out
+    return new URLSearchParams(out)
   }
 
   // caso: array de strings => tratamos como "fields"
@@ -25,7 +25,7 @@ export function buildPopulateParams(
     cfg.forEach((field, i) => {
       out.push([`${prefix}[fields][${i}]`, String(field)])
     })
-    return out
+    return new URLSearchParams(out)
   }
 
   // caso: objeto aninhado
@@ -64,5 +64,5 @@ export function buildPopulateParams(
     )
   }
 
-  return out
+  return new URLSearchParams(out)
 }
