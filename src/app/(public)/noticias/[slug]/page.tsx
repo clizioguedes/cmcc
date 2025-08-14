@@ -6,15 +6,15 @@ import {
 } from '@/modules/article/article-details'
 
 type ArticlePageProps = {
-  params: Promise<{ documentId: string }>
+  params: Promise<{ slug: string }>
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const { documentId } = await params
+  const { slug } = await params
 
   return (
     <Suspense fallback={<ArticleDetailsSkeleton />}>
-      <ArticleDetails documentId={documentId} />
+      <ArticleDetails slug={slug} />
     </Suspense>
   )
 }

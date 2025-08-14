@@ -7,23 +7,28 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { env } from '@/env'
-import { getArticleByDocumentId } from '@/http/requests/get-article-by-document-id'
+import { getArticleBySlug } from '@/http/requests/get-article-by-slug'
 import { dayjs } from '@/lib/day-js'
 import { cn } from '@/lib/utils'
 import { calculateBlogPostReadingTime } from '@/utils/calculate-blog-post-reading-time'
 import { capitalizeFirstLetter } from '@/utils/capitalize-first-letter'
 
+import { ArticleNotFound } from './article-not-fund'
 import { RelatedArticles } from './related-articles'
 import { RelatedArticlesSkeleton } from './related-articles-skeleton'
 
 type ArticleDetailsProps = {
-  documentId: string
+  slug: string
 }
 
-export async function ArticleDetails({ documentId }: ArticleDetailsProps) {
-  const article = await getArticleByDocumentId({ documentId })
+export async function ArticleDetails({ slug }: ArticleDetailsProps) {
+  const article = await getArticleBySlug({ slug })
 
-  const readingTime = calculateBlogPostReadingTime(article.content)
+  const readingTime = calculateBlogPostReadingTime(article?.content ?? [])
+
+  if (!article) {
+    return <ArticleNotFound />
+  }
 
   return (
     <article className="flex flex-col gap-8">
@@ -105,7 +110,7 @@ export async function ArticleDetails({ documentId }: ArticleDetailsProps) {
 
         <Suspense fallback={<RelatedArticlesSkeleton />}>
           <RelatedArticles
-            documentId={documentId}
+            documentId={article.documentId}
             tags={article.tags?.map((tag) => tag.slug) || []}
           />
         </Suspense>

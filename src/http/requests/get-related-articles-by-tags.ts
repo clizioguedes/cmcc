@@ -43,7 +43,13 @@ export async function getRelatedArticlesByTags(
   searchParams.append('sort[0]', 'publishedAt:desc')
 
   const response = await api
-    .get('articles', { searchParams })
+    .get('articles', {
+      searchParams,
+      next: {
+        tags: [`related-articles-${excludeDocumentId}`],
+        revalidate: 60 * 60 * 24, // 1 day
+      },
+    })
     .json<GetRelatedArticlesResponse>()
 
   return response.data

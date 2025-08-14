@@ -31,11 +31,11 @@ export async function RelatedArticles({
           <FileTextIcon className="text-muted-foreground h-8 w-8" />
         </div>
 
-        <h4 className="mb-2 text-lg font-medium">
+        <h4 className="mb-2 text-xl font-medium">
           Nenhuma notícias relacionada
         </h4>
 
-        <p className="text-muted-foreground max-w-md">
+        <p className="text-muted-foreground max-w-md text-lg">
           Não encontramos nenhuma notícias relacionada ao tema da sua leitura
         </p>
       </div>
@@ -50,7 +50,7 @@ export async function RelatedArticles({
           : '/article/placeholder.svg'
 
         return (
-          <Link key={article.id} href={`/noticias/${article.documentId}`}>
+          <Link key={article.id} href={`/noticias/${article.slug}`}>
             <article className="group" key={article.id}>
               <Image
                 src={articleCoverURL}
