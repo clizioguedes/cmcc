@@ -4,21 +4,21 @@ import { buildPopulateParams } from '@/utils/build-populate-params'
 
 import { api } from '../cms-api-client'
 
+type ArticleWithRelations = Article & {
+  tags?: Array<Tag>
+  cover?: Cover
+  author?: Author
+}
+
 export type GetArticleBySlugParams = {
   slug: string
 }
 
-export type GetArticleBySlugResponse = HttpResponse<
-  Array<
-    Article & {
-      tags?: Array<Tag>
-      cover?: Cover
-      author?: Author
-    }
-  >
->
+export type GetArticleBySlugResponse = HttpResponse<Array<ArticleWithRelations>>
 
-export async function getArticleBySlug(params: GetArticleBySlugParams) {
+export async function getArticleBySlug(
+  params: GetArticleBySlugParams,
+): Promise<ArticleWithRelations | null> {
   const { slug } = params
 
   const searchParams = buildPopulateParams({
@@ -42,7 +42,7 @@ export async function getArticleBySlug(params: GetArticleBySlugParams) {
     .get(`articles`, {
       searchParams,
       next: {
-        tags: [`articles-${slug}`],
+        tags: [`article-${slug}`],
         revalidate: 60 * 60 * 24, // 1 day
       },
     })
