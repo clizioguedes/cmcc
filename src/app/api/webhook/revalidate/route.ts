@@ -14,6 +14,7 @@ type WebhookBody = {
   event: StrapiEvent
   createdAt: string
   entry: WebhookEntry
+  model: 'article' | 'tag'
 }
 
 const ARTICLE_LIST_EVENTS: StrapiEvent[] = [
@@ -47,32 +48,36 @@ export async function POST(req: Request) {
       )
     }
 
-    const { event, entry } = body
+    const { event, entry, model } = body
 
     if (event === 'trigger-test') {
       console.log('✅ Webhook test received')
       return NextResponse.json({ revalidated: true })
     }
 
-    const revalidatedTags: string[] = []
+    if (model === 'article') {
+      const revalidatedTags: string[] = []
 
-    if (ARTICLE_LIST_EVENTS.includes(event)) {
-      revalidateTag('articles')
-      revalidatedTags.push('articles')
+      if (ARTICLE_LIST_EVENTS.includes(event)) {
+        revalidateTag('articles')
+        revalidatedTags.push('articles')
+      }
+
+      if (SINGLE_ARTICLE_EVENTS.includes(event) && entry?.slug) {
+        revalidateTag(`article-${entry.slug}`)
+        revalidatedTags.push(`article-${entry.slug}`)
+      }
+
+      if (revalidatedTags.length > 0) {
+        console.log(`🔄 Revalidated due to event "${event}":`, revalidatedTags)
+      } else {
+        console.log(`ℹ️ Event "${event}" received, no tags revalidated`)
+      }
+
+      return NextResponse.json({ revalidated: revalidatedTags })
     }
 
-    if (SINGLE_ARTICLE_EVENTS.includes(event) && entry?.slug) {
-      revalidateTag(`article-${entry.slug}`)
-      revalidatedTags.push(`article-${entry.slug}`)
-    }
-
-    if (revalidatedTags.length > 0) {
-      console.log(`🔄 Revalidated due to event "${event}":`, revalidatedTags)
-    } else {
-      console.log(`ℹ️ Event "${event}" received, no tags revalidated`)
-    }
-
-    return NextResponse.json({ revalidated: revalidatedTags })
+    return NextResponse.json({ revalidated: false })
   } catch (error) {
     console.error('❌ Webhook handler error:', error)
 
