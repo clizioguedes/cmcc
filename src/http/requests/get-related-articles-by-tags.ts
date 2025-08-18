@@ -46,7 +46,7 @@ export async function getRelatedArticlesByTags(
     .get('articles', {
       searchParams,
       next: {
-        tags: [`related-articles-${excludeDocumentId}`],
+        tags: ['articles'],
         revalidate: 60 * 60 * 24, // 1 day
       },
     })

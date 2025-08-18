@@ -21,7 +21,6 @@ export async function RelatedArticles({
     documentId,
     limit: 6,
     tags: tags.map((tag) => ({ slug: tag })),
-    // tags: [{ slug: 'noticias' }],
   })
 
   if (relatedArticles.length === 0) {
