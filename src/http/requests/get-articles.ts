@@ -16,7 +16,9 @@ export type GetArticlesParams = {
 
 export type GetArticlesResponse = Paginated<ArticleWithRelations>
 
-export async function getArticles() {
+export async function getArticles(params: GetArticlesParams = {}) {
+  const { query } = params
+
   const searchParams = buildPopulateParams({
     cover: true,
     author: {
@@ -32,6 +34,13 @@ export async function getArticles() {
   })
 
   searchParams.append('sort[0]', 'publishedAt:desc')
+
+  if (query) {
+    searchParams.append('filters[$or][0][title][$containsi]', query)
+    searchParams.append('filters[$or][1][description][$containsi]', query)
+    searchParams.append('filters[$or][2][content][$containsi]', query)
+    searchParams.append('filters[$or][3][tags][name][$containsi]', query)
+  }
 
   return api
     .get('articles', {
