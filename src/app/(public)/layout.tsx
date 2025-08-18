@@ -101,7 +101,7 @@ export default function PublicLayout({
 
         <div className="border-muted flex items-center border-y p-4 px-4">
           <Input
-            placeholder="Pesquisar..."
+            placeholder="Pesquisar notícia..."
             className={cn('ml-auto w-full', 'lg:w-fit')}
             icon={SearchIcon}
           />

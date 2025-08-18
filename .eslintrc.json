@@ -1,10 +1,12 @@
 {
   "extends": [
     "@rocketseat/eslint-config/next",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "plugins": [
-    "simple-import-sort"
+    "simple-import-sort",
+    "@tanstack/query"
   ],
   "rules": {
     "simple-import-sort/imports": "error",
