@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { env } from '@/env'
 import { getRelatedArticlesByTags } from '@/http/requests/get-related-articles-by-tags'
 import { dayjs } from '@/lib/day-js'
+import { cn } from '@/lib/utils'
 import { capitalizeFirstLetter } from '@/utils/capitalize-first-letter'
 
 type RelatedArticlesProps = {
@@ -46,20 +47,31 @@ export async function RelatedArticles({
       {relatedArticles.map((article) => {
         const articleCoverURL = article.cover?.url
           ? `${env.NEXT_PUBLIC_CMS_URL}${article.cover?.url}`
-          : '/article/placeholder.svg'
+          : null
 
         return (
           <Link key={article.id} href={`/noticias/${article.slug}`}>
-            <article className="group" key={article.id}>
-              <Image
-                src={articleCoverURL}
-                alt="TypeScript Best Practices"
-                className="mb-4 h-full max-h-52 w-full rounded-lg object-cover transition-opacity group-hover:opacity-90"
-                width={600}
-                height={400}
-              />
+            <article
+              className={cn(
+                'group flex flex-col gap-2 transition',
+                'hover:opacity-80',
+              )}
+              key={article.id}
+            >
+              {articleCoverURL && (
+                <Image
+                  src={articleCoverURL}
+                  alt="TypeScript Best Practices"
+                  className={cn(
+                    'mb-2 h-full max-h-52 w-full rounded-lg object-cover transition-opacity',
+                    'group-hover:opacity-90',
+                  )}
+                  width={600}
+                  height={400}
+                />
+              )}
 
-              <div className="mb-2 flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2">
                 {article.tags?.map((tag) => (
                   <Badge key={tag.id} variant="secondary">
                     {tag.name}
@@ -67,7 +79,7 @@ export async function RelatedArticles({
                 ))}
               </div>
 
-              <h4 className="group-hover:text-primary mb-2 text-lg font-semibold transition-colors">
+              <h4 className="text-lg font-semibold transition-colors">
                 {article.title}
               </h4>
 
@@ -82,9 +94,14 @@ export async function RelatedArticles({
                   )}
                 </span>
 
-                <div className="group-hover:text-primary flex items-center gap-1 transition-colors">
+                <div
+                  className={cn(
+                    'text-muted-foreground flex items-center gap-1',
+                    'group-hover:underline group-hover:underline-offset-4',
+                  )}
+                >
                   <span>Ler mais</span>
-                  <ArrowRightIcon className="h-3 w-3" />
+                  <ArrowRightIcon className="size-3" />
                 </div>
               </div>
             </article>

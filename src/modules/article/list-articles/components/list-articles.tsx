@@ -27,7 +27,7 @@ export async function ListArticles() {
         {articles.data.map((article) => {
           const articleCoverURL = article.cover?.url
             ? `${env.NEXT_PUBLIC_CMS_URL}${article.cover?.url}`
-            : '/article/placeholder.svg'
+            : null
 
           const readingTime = calculateBlogPostReadingTime(
             article?.content ?? [],
@@ -38,9 +38,9 @@ export async function ListArticles() {
             ?.children.find((child) => child.type === 'text')?.text
 
           return (
-            <Link key={article.id} href={`/noticias/${article.id}`}>
-              <article className="group flex h-full flex-col justify-between gap-4">
-                <div className="flex flex-col gap-4">
+            <Link key={article.id} href={`/noticias/${article.slug}`}>
+              <article className="group flex h-full flex-col gap-4">
+                {articleCoverURL && (
                   <Image
                     width={600}
                     height={400}
@@ -48,23 +48,23 @@ export async function ListArticles() {
                     alt={article.title}
                     className="h-48 w-full rounded-lg object-cover transition-opacity group-hover:opacity-90"
                   />
+                )}
 
-                  <div className="flex flex-wrap gap-2">
-                    {article.tags?.map((tag) => (
-                      <Badge key={tag.id} variant="outline" className="text-xs">
-                        {tag.name}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <h2 className="group-hover:text-primary text-xl leading-tight font-semibold transition-colors">
-                    {article.title}
-                  </h2>
-
-                  <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
-                    {article.description || findFirstParagraph}
-                  </p>
+                <div className="flex flex-wrap gap-2">
+                  {article.tags?.map((tag) => (
+                    <Badge key={tag.id} variant="outline" className="text-xs">
+                      {tag.name}
+                    </Badge>
+                  ))}
                 </div>
+
+                <h2 className="group-hover:text-primary text-xl leading-tight font-semibold transition-colors">
+                  {article.title}
+                </h2>
+
+                <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
+                  {article.description || findFirstParagraph}
+                </p>
 
                 <div className="flex flex-col gap-4">
                   <div
