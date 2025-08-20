@@ -79,7 +79,7 @@ export async function RelatedArticles({
                 ))}
               </div>
 
-              <h4 className="text-lg font-semibold transition-colors">
+              <h4 className="text-lg font-semibold transition-colors group-hover:underline group-hover:underline-offset-4">
                 {article.title}
               </h4>
 
@@ -94,12 +94,7 @@ export async function RelatedArticles({
                   )}
                 </span>
 
-                <div
-                  className={cn(
-                    'text-muted-foreground flex items-center gap-1',
-                    'group-hover:underline group-hover:underline-offset-4',
-                  )}
-                >
+                <div className="text-muted-foreground flex items-center gap-1">
                   <span>Ler mais</span>
                   <ArrowRightIcon className="size-3" />
                 </div>

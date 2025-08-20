@@ -38,8 +38,14 @@ export async function ListArticles() {
             ?.children.find((child) => child.type === 'text')?.text
 
           return (
-            <Link key={article.id} href={`/noticias/${article.slug}`}>
-              <article className="group flex h-full flex-col gap-4">
+            <Link
+              key={article.id}
+              href={`/noticias/${article.slug}`}
+              className="h-fit"
+            >
+              <article
+                className={cn('group flex flex-col gap-4', 'hover:opacity-80')}
+              >
                 {articleCoverURL && (
                   <Image
                     width={600}
@@ -58,7 +64,12 @@ export async function ListArticles() {
                   ))}
                 </div>
 
-                <h2 className="group-hover:text-primary text-xl leading-tight font-semibold transition-colors">
+                <h2
+                  className={cn(
+                    'text-xl leading-tight font-semibold transition-colors',
+                    'group-hover:underline group-hover:underline-offset-4',
+                  )}
+                >
                   {article.title}
                 </h2>
 
@@ -108,7 +119,7 @@ export async function ListArticles() {
                   </div>
 
                   <div className="border-t pt-3">
-                    <div className="group-hover:text-primary flex items-center gap-1 text-sm transition-colors">
+                    <div className="flex items-center gap-1 text-sm transition-colors">
                       <span>Ler mais</span>
                       <ArrowRight className="size-3" />
                     </div>

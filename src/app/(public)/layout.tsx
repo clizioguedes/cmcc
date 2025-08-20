@@ -89,7 +89,7 @@ export default function PublicLayout({
             </Button>
 
             <Button asChild variant="outline">
-              <Link href="/site/sitemap">
+              <Link href="/acessibilidade">
                 <PersonStandingIcon className="size-4" />
                 Acessibilidade
               </Link>
