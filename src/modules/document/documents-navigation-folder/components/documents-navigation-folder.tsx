@@ -2,10 +2,10 @@
 
 import {
   Archive,
-  ChevronRight,
+  ChevronRightIcon,
   FileText,
-  Folder,
-  FolderOpen,
+  FolderIcon,
+  FolderOpenIcon,
   ImageIcon,
   Music,
   Video,
@@ -13,8 +13,7 @@ import {
 import { useState } from 'react'
 
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 
 interface FileItem {
   id: string
@@ -362,34 +361,17 @@ const folders: FolderItem[] = [
 const getFileIcon = (type: FileItem['type']) => {
   switch (type) {
     case 'document':
-      return <FileText className="h-4 w-4" />
+      return <FileText className="size-4 text-blue-600" />
     case 'image':
-      return <ImageIcon className="h-4 w-4" />
+      return <ImageIcon className="size-4 text-green-600" />
     case 'video':
-      return <Video className="h-4 w-4" />
+      return <Video className="size-4 text-purple-600" />
     case 'audio':
-      return <Music className="h-4 w-4" />
+      return <Music className="size-4 text-orange-600" />
     case 'archive':
-      return <Archive className="h-4 w-4" />
+      return <Archive className="size-4 text-gray-600" />
     default:
-      return <FileText className="h-4 w-4" />
-  }
-}
-
-const getFileTypeColor = (type: FileItem['type']) => {
-  switch (type) {
-    case 'document':
-      return 'text-blue-600'
-    case 'image':
-      return 'text-green-600'
-    case 'video':
-      return 'text-purple-600'
-    case 'audio':
-      return 'text-orange-600'
-    case 'archive':
-      return 'text-gray-600'
-    default:
-      return 'text-gray-600'
+      return <FileText className="size-4 text-gray-600" />
   }
 }
 
@@ -408,114 +390,104 @@ export function DocumentsNavigationFolder() {
   }
 
   return (
-    <div>
-      <header className="mb-8">
-        <h1 className="mb-4 text-4xl font-bold">File Explorer</h1>
+    <div className="flex flex-col gap-4">
+      <header>
+        <h1 className="text-4xl font-bold">File Explorer</h1>
         <p className="text-muted-foreground text-lg">
           Browse and manage your project files organized by folders. Click on
           any folder to view its contents.
         </p>
       </header>
 
-      <div className="space-y-4">
+      <div className="space-y-0">
         {folders.map((folder) => {
           const isExpanded = expandedFolders.has(folder.id)
 
           return (
-            <Card key={folder.id} className="overflow-hidden">
-              <CardContent className="p-0">
-                <div
-                  className="hover:bg-muted/50 cursor-pointer p-6 transition-colors"
-                  onClick={() => toggleFolder(folder.id)}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-2">
-                        {isExpanded ? (
-                          <FolderOpen className="text-primary h-6 w-6" />
-                        ) : (
-                          <Folder className="text-muted-foreground h-6 w-6" />
+            <div key={folder.id}>
+              <div
+                className={cn('cursor-pointer py-2 transition-colors')}
+                onClick={() => toggleFolder(folder.id)}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
+                      {isExpanded ? (
+                        <FolderOpenIcon className="text-muted-foreground size-5" />
+                      ) : (
+                        <FolderIcon className="text-muted-foreground size-5" />
+                      )}
+
+                      <div
+                        className={cn(
+                          'transition-transform duration-200',
+                          isExpanded ? 'rotate-90' : 'rotate-0',
                         )}
-                        <div
-                          className={`transition-transform duration-200 ${isExpanded ? 'rotate-90' : 'rotate-0'}`}
-                        >
-                          <ChevronRight className="text-muted-foreground h-4 w-4" />
+                      >
+                        <ChevronRightIcon className="text-muted-foreground size-4" />
+                      </div>
+                    </div>
+
+                    <h3 className="text-base font-medium">{folder.name}</h3>
+                  </div>
+
+                  <div className="flex flex-col items-end gap-2">
+                    <Badge variant="secondary">
+                      {folder.fileCount} arquivos
+                    </Badge>
+
+                    <p className="text-muted-foreground text-sm">
+                      Atualizado em {folder.modified}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={cn(
+                  'max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-in-out',
+                  isExpanded && 'max-h-[1000px] opacity-100',
+                )}
+              >
+                <div className="bg-muted/20 rounded-lg">
+                  <div className="grid gap-2">
+                    {folder.files.map((file, index) => (
+                      <div
+                        key={file.id}
+                        className={cn(
+                          'hover:bg-muted/60 group flex translate-y-2 transform cursor-pointer rounded-lg px-3 py-2 opacity-0 transition-all duration-200',
+                          isExpanded && 'translate-y-0 opacity-100',
+                        )}
+                        style={{
+                          transitionDelay: isExpanded
+                            ? `${index * 50}ms`
+                            : '0ms',
+                        }}
+                      >
+                        <div className="flex items-center gap-3">
+                          {getFileIcon(file.type)}
+
+                          <div>
+                            <p
+                              className={cn(
+                                'font-medium transition-colors',
+                                'group-hover:text-primary',
+                              )}
+                            >
+                              {file.name}
+                            </p>
+
+                            <p className="text-muted-foreground text-sm">
+                              {file.size} • Publicado {file.modified}
+                            </p>
+                          </div>
                         </div>
                       </div>
-
-                      <div>
-                        <h3 className="text-xl font-semibold">{folder.name}</h3>
-                        <p className="text-muted-foreground">
-                          {folder.description}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="text-right">
-                      <Badge variant="secondary" className="mb-2">
-                        {folder.fileCount} files
-                      </Badge>
-                      <p className="text-muted-foreground text-sm">
-                        Modified {folder.modified}
-                      </p>
-                    </div>
+                    ))}
                   </div>
                 </div>
-
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isExpanded
-                      ? 'max-h-[2000px] opacity-100'
-                      : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <div className="bg-muted/20 border-t">
-                    <div className="p-6">
-                      <div className="grid gap-3">
-                        {folder.files.map((file, index) => (
-                          <div
-                            key={file.id}
-                            className={`hover:bg-background/80 group flex transform cursor-pointer items-center justify-between rounded-lg p-3 transition-all ${
-                              isExpanded
-                                ? 'translate-y-0 opacity-100'
-                                : 'translate-y-2 opacity-0'
-                            }`}
-                            style={{
-                              transitionDelay: isExpanded
-                                ? `${index * 50}ms`
-                                : '0ms',
-                              transitionDuration: '200ms',
-                            }}
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className={`${getFileTypeColor(file.type)}`}>
-                                {getFileIcon(file.type)}
-                              </div>
-                              <div>
-                                <p className="group-hover:text-primary font-medium transition-colors">
-                                  {file.name}
-                                </p>
-                                <p className="text-muted-foreground text-sm">
-                                  {file.size} • Modified {file.modified}
-                                </p>
-                              </div>
-                            </div>
-
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="opacity-0 transition-opacity group-hover:opacity-100"
-                            >
-                              Open
-                            </Button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           )
         })}
       </div>
