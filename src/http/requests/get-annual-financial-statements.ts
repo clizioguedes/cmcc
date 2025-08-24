@@ -1,6 +1,7 @@
 import type { DocumentWithFolder } from '@/entities/document-base'
 import type { HttpResponse } from '@/types/http'
 import { buildPopulateParams } from '@/utils/build-populate-params'
+import { Sleep } from '@/utils/sleep'
 
 import { api } from '../cms-api-client'
 
@@ -12,6 +13,8 @@ export async function getAnnualFinancialStatements() {
   const searchParams = buildPopulateParams({
     file: true,
   })
+
+  await Sleep(3000)
 
   const response = await api
     .get('annual-financial-statements', {

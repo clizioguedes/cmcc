@@ -51,7 +51,7 @@ export function FileExplorer({ folders }: FileExplorerProps) {
   }
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-1">
       {folders.map((folder) => {
         const isExpanded = expandedFolders.has(folder.id)
 
