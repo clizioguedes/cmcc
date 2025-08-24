@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server'
 import { env } from '@/env'
 import type { StrapiEvent } from '@/types/strapi'
 
+type Model = 'article' | 'annual-budget-law' | 'annual-financial-statement'
+
 type WebhookEntry = {
   id: number
   documentId: string
@@ -14,7 +16,7 @@ type WebhookBody = {
   event: StrapiEvent
   createdAt: string
   entry: WebhookEntry
-  model: 'article' | 'tag'
+  model: Model
 }
 
 const ARTICLE_LIST_EVENTS: StrapiEvent[] = [
@@ -75,6 +77,16 @@ export async function POST(req: Request) {
       }
 
       return NextResponse.json({ revalidated: revalidatedTags })
+    }
+
+    if (model === 'annual-budget-law') {
+      revalidateTag('annual-budget-laws')
+      return NextResponse.json({ revalidated: ['annual-budget-laws'] })
+    }
+
+    if (model === 'annual-financial-statement') {
+      revalidateTag('annual-financial-statements')
+      return NextResponse.json({ revalidated: ['annual-financial-statements'] })
     }
 
     return NextResponse.json({ revalidated: false })

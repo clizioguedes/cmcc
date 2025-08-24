@@ -2,7 +2,7 @@ import { FileExplorer } from '@/components/file-explorer'
 import { getAnnualFinancialStatements } from '@/http/requests/get-annual-financial-statements'
 import { groupedDocumentsInFolder } from '@/utils/grouped-documents-in-folder'
 
-export default async function FoldersPage() {
+export default async function AnnualFinancialStatementsPage() {
   const annualFinancialStatements = await getAnnualFinancialStatements()
   const groupedDocuments = groupedDocumentsInFolder(annualFinancialStatements)
 
