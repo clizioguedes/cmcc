@@ -111,7 +111,7 @@ export function FileExplorer({ folders }: FileExplorerProps) {
                       <div className="flex flex-col">
                         <p
                           className={cn(
-                            'font-medium transition-colors',
+                            'font-medium break-all transition-colors',
                             'group-hover:text-primary',
                           )}
                         >
