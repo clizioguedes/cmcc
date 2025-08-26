@@ -97,6 +97,66 @@ html {
   --sidebar-ring: oklch(0.707 0.022 261.325);
 }
 
+:root[data-theme="january"] {
+  --primary: oklch(0.55 0.15 240); /* azul */
+  --secondary: oklch(0.75 0.15 0); /* vermelho */
+}
+
+:root[data-theme="february"] {
+  --primary: oklch(0.75 0.15 90); /* amarelo */
+  --secondary: oklch(0.55 0.15 240); /* azul */
+}
+
+:root[data-theme="march"] {
+  --primary: oklch(0.75 0.15 0); /* vermelho */
+  --secondary: oklch(0.75 0.15 90); /* amarelo */
+}
+
+:root[data-theme="april"] {
+  --primary: oklch(0.75 0.15 90); /* amarelo */
+  --secondary: oklch(0.75 0.15 0); /* vermelho */
+}
+
+:root[data-theme="may"] {
+  --primary: oklch(0.75 0.15 0); /* vermelho */
+  --secondary: oklch(0.55 0.15 240); /* azul */
+}
+
+:root[data-theme="june"] {
+  --primary: oklch(0.55 0.15 240); /* azul */
+  --secondary: oklch(0.75 0.15 0); /* vermelho */
+}
+
+:root[data-theme="july"] {
+  --primary: oklch(0.75 0.15 0); /* vermelho */
+  --secondary: oklch(0.75 0.15 90); /* amarelo */
+}
+
+:root[data-theme="august"] {
+  --primary: oklch(0.75 0.15 90); /* amarelo */
+  --secondary: oklch(0.75 0.15 0); /* vermelho */
+}
+
+:root[data-theme="september"] {
+  --primary: oklch(0.75 0.15 0); /* vermelho */
+  --secondary: oklch(0.55 0.15 240); /* azul */
+}
+
+:root[data-theme="october"] {
+  --primary: oklch(0.55 0.15 240); /* azul */
+  --secondary: oklch(0.75 0.15 0); /* vermelho */
+}
+
+:root[data-theme="november"] {
+  --primary: oklch(0.75 0.15 0); /* vermelho */
+  --secondary: oklch(0.75 0.15 90); /* amarelo */
+}
+
+:root[data-theme="december"] {
+  --primary: oklch(0.75 0.15 90); /* amarelo */
+  --secondary: oklch(0.75 0.15 0); /* vermelho */
+}
+
 .dark {
   --background: oklch(0.13 0.028 261.692);
   --foreground: oklch(0.985 0.002 247.839);

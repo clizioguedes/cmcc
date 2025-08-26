@@ -2,6 +2,8 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 
+import { MONTHS } from '@/constants/month'
+
 import { Providers } from './providers'
 
 export const metadata: Metadata = {
@@ -14,8 +16,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const month = new Date().getMonth()
+  const currentTheme = MONTHS[month]
+
   return (
-    <html lang="pt-BR" className="antialiased" suppressHydrationWarning>
+    <html
+      lang="pt-BR"
+      className="antialiased"
+      data-theme={currentTheme}
+      suppressHydrationWarning
+    >
       <body>
         <Providers>{children}</Providers>
       </body>
