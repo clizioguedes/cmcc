@@ -13,7 +13,7 @@ export function NavLogo() {
       <SidebarMenuItem>
         <SidebarMenuButton
           size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground gap-2.5"
+          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground gap-2.5 hover:bg-green-50 dark:hover:bg-green-950/20"
           asChild
         >
           <Link href="/">
@@ -25,8 +25,13 @@ export function NavLogo() {
             />
 
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">Cerro Cora</span>
-              <span className="truncate text-xs">Câmara</span>
+              <span className="truncate text-xs text-blue-600 dark:text-blue-400">
+                Câmara Municipal
+              </span>
+
+              <span className="truncate font-medium text-green-600 dark:text-green-400">
+                Cerro Corá - RN
+              </span>
             </div>
           </Link>
         </SidebarMenuButton>
