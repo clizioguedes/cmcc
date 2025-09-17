@@ -5,9 +5,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
   compress: true,
   swcMinify: true,
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
+  // compiler: {
+  //   removeConsole: process.env.NODE_ENV === 'production',
+  // },
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
